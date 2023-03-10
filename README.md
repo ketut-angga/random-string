@@ -14,4 +14,12 @@ $randomString = (new Random)
   ->uppercase()
   ->numeric()
   ->generate();
+ 
+$arrayRandomString = (new Random)
+  ->length(32)
+  ->block(5)
+  ->lowercase()
+  ->uppercase()
+  ->numeric()
+  ->generate();
 ```
