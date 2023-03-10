@@ -1,0 +1,29 @@
+{
+    "name": "ketut/random-string",
+    "description": "Generate random string",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ketut\\RandomString\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ketut-angga",
+            "email": "anggapande45@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
