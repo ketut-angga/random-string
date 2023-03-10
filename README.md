@@ -2,6 +2,10 @@
 Generate random string
 
 ```bash
+composer require ketut/random-string
+```
+
+```bash
 use Ketut\RandomString\Random;
 
 $randomString = (new Random)
