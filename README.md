@@ -21,5 +21,5 @@ $arrayRandomString = (new Random)
   ->lowercase()
   ->uppercase()
   ->numeric()
-  ->generate();
+  ->generateBlock();
 ```
