@@ -1,10 +1,11 @@
 # random-string
-Generate random string
+Installation
 
 ```bash
 composer require ketut/random-string
 ```
 
+How to use
 ```bash
 use Ketut\RandomString\Random;
 
