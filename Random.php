@@ -6,9 +6,9 @@ use Exception;
 
 class Random
 {
-    private const CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private const LENGTH = 12;
-    private const COUNT = 5;
+    public const CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public const LENGTH = 12;
+    public const COUNT = 5;
 
     private ?string $char = null;
     private ?int $length = null;
