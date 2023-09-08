@@ -8,7 +8,7 @@
             "Ketut\\RandomString\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/Test/"
         ]
     },
     "authors": [
