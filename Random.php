@@ -45,14 +45,55 @@ class Random
         $char = $this->char ?: self::CHAR;
         $length = $this->length ?: self::LENGTH;
 
-        $pieces = [];
+        $pieces = self::strBaseTime($char, 6);
         $max = mb_strlen($char, '8bit') - 1;
 
         for ($i = 0; $i < $length; ++$i) {
-            $pieces [] = $char[random_int(0, $max)];
+            $pieces .= $char[random_int(0, $max)];
         }
 
-        return implode('', $pieces);
+        return substr($pieces, 0, $length);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function strBaseTime(string $char, int $length): string
+    {
+        $grpInt = self::grpIntBaseTime($length);
+        $result = '';
+
+        for ($i = 0; $i < $length; ++$i) {
+            $result .= $char[(int)$grpInt[$i]] ?? '';
+        }
+
+        return $result;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function grpIntBaseTime(int $length): string
+    {
+        $timecodes = time() - 60;
+        $result = [];
+
+        while ($timecodes !== 0) {
+            $result[] = chr($timecodes & 0xFF);
+            $timecodes >>= 8;
+        }
+
+        $data= str_pad(implode('', array_reverse($result)), 8, "\000", STR_PAD_LEFT);
+        $hash = hash_hmac('sha256', $data, $data, true);
+        $unpacked = unpack('C*', $hash);
+        $unpacked !== false || throw new \Exception('Invalid data.');
+        $hmac = array_values($unpacked);
+
+        $offset = ($hmac[count($hmac) - 1] & 0xF);
+        $code = ($hmac[$offset] & 0x7F) << 24 | ($hmac[$offset + 1] & 0xFF) << 16 | ($hmac[$offset + 2] & 0xFF) << 8 | ($hmac[$offset + 3] & 0xFF);
+        $otp = $code % (10 ** $length);
+
+        return str_pad((string) $otp, $length, '0', STR_PAD_LEFT);
     }
 
     /**
